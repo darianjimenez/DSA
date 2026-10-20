@@ -1,5 +1,6 @@
-/*
- * Project Euler Problem 81 Solution
+/**
+ * @file ProjectEuler.cpp
+ * @brief Project Euler Problem 81 Solution
  */
 
 #include "Dijkstras.hpp"
@@ -12,9 +13,10 @@
 using namespace std;
 
 /**
- * Read matrix text file, create directional weighted graph
- * and use Dijkstras implementation to find the min path from
- * the top left cell to the bottom right.
+ * @brief Read matrix text file, create directional weighted graph
+ *        and use Dijkstras implementation to find the min path from
+ *        the top left cell to the bottom right.
+ * @return 0 on exit
  */
 int main() {
     ifstream file("matrix.txt");

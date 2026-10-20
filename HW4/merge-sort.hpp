@@ -1,5 +1,6 @@
 /**
- * Merge Sort Algorithm Implementation
+ * @file merge-sort.hpp
+ * @brief Merge Sort Algorithm Implementation
  *  1. Divide the array into 2 halves recursively
  *  2. Recursively apply merge sort to first half
  *  3. Reursively apply merge sort to second half
@@ -12,7 +13,14 @@
 
 using namespace std;
 
-// Merge 2 sorted halves
+/**
+ * @brief Merge 2 sorted halves of an array into 1
+ *
+ * @param arr   Array containing both sections
+ * @param left  Index of first element of the left section
+ * @param split Index of last element of the left section (middle)
+ * @param right Index of last element of the right section
+ */
 void merge(vector<int> &arr, int left, int split, int right) {
     vector<int> temp;
 
@@ -46,7 +54,13 @@ void merge(vector<int> &arr, int left, int split, int right) {
     }
 }
 
-// Recursively split and sort
+/**
+ * @brief Recursively sorts arr
+ *
+ * @param arr   Array to sort
+ * @param left  Index of first element of the section
+ * @param right Index of last element of the section
+ */
 void mergeSortHelper(vector<int> &arr, int left, int right) {
     // Stop when the section has 1 or fewer elements
     if (left >= right) {
@@ -63,6 +77,10 @@ void mergeSortHelper(vector<int> &arr, int left, int right) {
     merge(arr, left, split, right);
 }
 
+/**
+ * @brief Sort a vector of integers O(nlogn)
+ * @param arr Array to sort
+ */
 void mergeSort(vector<int> &arr) {
     mergeSortHelper(arr, 0, arr.size() - 1);
 }

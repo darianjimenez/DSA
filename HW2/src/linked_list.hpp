@@ -1,14 +1,28 @@
+/**
+ * @file linked_list.hpp
+ * @brief Doubly linked list of integers
+ */
+
 #pragma once
 #include <iostream>
 
+/**
+ * @brief A doubly linked list of ints.
+ */
 class LinkedList {
 private:
+    /**
+     * @brief A single node in the list.
+     */
     struct Node {
         int data;
         Node *next;
         Node *prev;
 
-        // Create new node
+        /**
+         * @brief Create unlinked node
+         * @param val Value to store
+         */
         Node(int val) {
             data = val;
             next = NULL; // Null because not connected yet
@@ -20,13 +34,18 @@ private:
     Node *tail; // points to last node
 
 public:
-    // Create empty linked list
+    /**
+     * @brief Creates an empty list.
+     */
     LinkedList() {
         head = NULL;
         tail = NULL;
     }
 
-    /* Adds the element [data] to the front of the linked list. */
+    /**
+     * @brief Adds the element [data] to the front of the linked list.
+     * @param data The value to add
+     */
     void pushFront(int data) {
         Node *newNode = new Node(data); // Create a new node w/ value
 
@@ -42,7 +61,10 @@ public:
         head = newNode;       // New node is now new head
     }
 
-    /* Adds the element [data] to the back of the linked list. */
+    /**
+     * @brief Adds the element [data] to the back of the linked list.
+     * @param data The value to add
+     */
     void pushBack(int data) {
         Node *newNode = new Node(data); // Create a new node w/ value
 
@@ -58,8 +80,11 @@ public:
         tail = newNode;       // New node is now new tail
     }
 
-    /* Removes an element from the front of the list. If the list is empty, it is unchanged.
-       @return the value at the front of the list or nil if none exists */
+    /**
+     * @brief Removes an element from the front of the list.
+     *        If the list is empty, it is unchanged.
+     * @return the value at the front of the list or nil if none exists
+     */
     int popFront() {
         if (head == NULL) {
             return 0; // Return 0 of list empty
@@ -82,8 +107,11 @@ public:
         return val;
     }
 
-    /* Removes an element from the back of the list. If the list is empty, it is unchanged.
-       @return the value at the back of the list or nil if none exists */
+    /**
+     * @brief Removes an element from the back of the list.
+     *        If the list is empty, it is unchanged.
+     * @return the value at the back of the list or nil if none exists
+     */
     int popBack() {
         if (tail == NULL) {
             return 0; // Return 0 of list empty
@@ -106,7 +134,10 @@ public:
         return val;
     }
 
-    /* @return the value at the front of the list or nil if none exists */
+    /**
+     * @brief Get the first value without removing it
+     * @return the value at the front of the list or nil if none exists
+     */
     int peekFront() {
         if (head == NULL) {
             return 0;
@@ -114,7 +145,10 @@ public:
         return head->data;
     }
 
-    /* @return the value at the back of the list or nil if none exists */
+    /**
+     * @brief Gets the last value without removing it
+     * @return the value at the back of the list or nil if none exists
+     */
     int peekBack() {
         if (tail == NULL) {
             return 0;
@@ -123,7 +157,10 @@ public:
         return tail->data;
     }
 
-    /* @return true if the list is empty and false otherwise */
+    /**
+     * @brief Checks whether the list has no elements
+     * @return true if the list is empty and false otherwise
+     */
     bool isEmpty() {
         if (head == NULL) {
             return true; // List must be empty if head is null

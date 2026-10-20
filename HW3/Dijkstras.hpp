@@ -1,5 +1,6 @@
 /**
- * Dijkstras Algorithm Implementation
+ * @file Dijkstras.hpp
+ * @brief Dijkstras Algorithm Implementation
  */
 
 #pragma once
@@ -12,13 +13,22 @@
 #include <vector>
 
 using namespace std;
-template <typename V>
 
+/**
+ * @brief Finds shortest path between 2 vertices with non-negative edges
+ *
+ * @param V Vertex type
+ * @param graph Graph to search
+ * @param start Starting Vertex
+ * @param target Destination Vertex
+ *
+ * @return Vertices on shortest path from start to target
+ */
+template <typename V>
 optional<vector<V>> dijkstra(Graph<V> &graph, V start, V target) {
     unordered_map<V, double> dist; // Shortest distance to each vertex
     unordered_map<V, V> prev;      // Prev vertex used to reach each vertex
-
-    MinPriorityQueue<V> queue; // Which vertex to check next?
+    MinPriorityQueue<V> queue;     // Which vertex to check next?
 
     auto vertices = graph.getVertices(); // get all vertices
 
@@ -29,23 +39,22 @@ optional<vector<V>> dijkstra(Graph<V> &graph, V start, V target) {
     }
 
     // Check both start and target exist
-    if (dist.find(start) == dist.end() ||
-        dist.find(target) == dist.end()) {
+    if (dist.find(start) == dist.end() || dist.find(target) == dist.end()) {
         return nullopt;
     }
 
     dist[start] = 0;                // Dist from start to itself is 0
     queue.adjustPriority(start, 0); // Start is the first vertex checked
 
-    // Keep goign until no vertices left
+    // Keep going until no vertices left
     while (!queue.isEmpty()) {
-        auto nextVertex = queue.next(); // get vertex with lowest priority
+        auto nextVertex = queue.next(); // Get vertex with lowest priority
         if (!nextVertex.has_value()) {
             break;
         }
         V current = nextVertex.value();
 
-        if (current == target) // stop if target reached
+        if (current == target) // Stop if target reached
             break;
 
         auto edges = graph.getEdges(current);
@@ -57,7 +66,7 @@ optional<vector<V>> dijkstra(Graph<V> &graph, V start, V target) {
 
             double newDist = dist[current] + cost; // New possible dist to neighbor
 
-            // If this path shorter, save
+            // If this path is shorter, save
             if (newDist < dist[neighbor]) {
                 dist[neighbor] = newDist;
                 prev[neighbor] = current;                // Save how we got here
@@ -71,7 +80,7 @@ optional<vector<V>> dijkstra(Graph<V> &graph, V start, V target) {
         return nullopt;
     }
 
-    // Make final path
+    // Build final path
     vector<V> path;
     V current = target;
 

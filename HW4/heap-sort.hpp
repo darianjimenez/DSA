@@ -1,5 +1,6 @@
 /**
- * Heap Sort Implementation
+ * @file heap-sort.hpp
+ * @brief Heap Sort Implementation
  *  1. Treats unsorted array as binary tree
  *  2. Build max-heap to store data from unsorted list
  *  3. Extract largest value from heap and place into a sorted list
@@ -12,6 +13,13 @@
 
 using namespace std;
 
+/**
+ * @brief Restorres max-heap property for the subtree
+ * 
+ * @param arr The array holding the heap
+ * @param n   Number of elements in the heap
+ * @param i   Index of subtree root to fix
+ */
 void heapify(vector<int> &arr, int n, int i) {
     int largest = i;
 
@@ -36,6 +44,10 @@ void heapify(vector<int> &arr, int n, int i) {
     }
 }
 
+/**
+ * @brief Sorts a vector of integers in ascending order, in place O(nlogn)
+ * @param arr Vector to sort
+ */
 void heapSort(vector<int> &arr) {
     int n = arr.size();
 

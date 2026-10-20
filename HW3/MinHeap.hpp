@@ -1,5 +1,6 @@
 /**
- * Min Heap stored in a vector
+ * @file MinHeap.hpp
+ * @brief Min-heap with priorities, stored in a vector
  * The element with lowest priority stays at the top
  */
 
@@ -10,6 +11,15 @@
 using namespace std;
 template <typename T>
 
+/**
+ * @brief Min-heap where element with lowest priority is on top
+ *
+ * Complete binary tree stored in a vector.
+ * For node at index i, parent = (i-1)/2, children = 2i+1 and 2i+2
+ * Each node has a priority equal to or smaller than its children
+ *
+ * @param T Element type.
+ */
 class MinHeap {
 private:
     // Store Element and Priority
@@ -20,7 +30,10 @@ private:
 
     vector<Node> heap; // heap stored in vector
 
-    // Func to move node up until min-heap property is correct
+    /**
+     * @brief Move node up until min-heap property is correct
+     * @param i Index of the node to move
+     */
     void heapifyUp(int i) {
         while (i > 0) {
             int parent = (i - 1) / 2; // find parent index
@@ -37,7 +50,10 @@ private:
         }
     }
 
-    // Func to move node down until min-heap property is correct
+    /**
+     * @brief Move node down until min-heap property is correct
+     * @param i Index of the node to move
+     */
     void heapifyDown(int i) {
         while (true) {
             int left = 2 * i + 1;  // Find left child index
@@ -49,18 +65,15 @@ private:
                 heap[left].priority < heap[smallest].priority) {
                 smallest = left;
             }
-
             // or right smaller priority?
             if (right < heap.size() &&
                 heap[right].priority < heap[smallest].priority) {
                 smallest = right;
             }
-
             // Stop if current node smallest
             if (smallest == i) {
                 break;
             }
-
             // Swap current node with smaller child
             Node temp = heap[i];
             heap[i] = heap[smallest];
@@ -71,14 +84,21 @@ private:
     }
 
 public:
-    // Add element
+    /**
+     * @brief Adds element with priority O(logn)
+     * @param element  Element to add
+     * @param priority Priority of element based on value
+     */
     void push(T element, double priority) {
         Node node = {element, priority};
         heap.push_back(node);
         heapifyUp(heap.size() - 1);
     }
 
-    // Remove min element
+    /**
+     * @brief Removes the element with lowest priority
+     * Do nothing if heap empty
+     */
     void pop() {
         if (heap.empty()) {
             return;
@@ -92,7 +112,10 @@ public:
         heapifyDown(0);
     }
 
-    // Return minimum element
+    /**
+     * @brief Gets the element with the lowest priority without removing it
+     * @return The top element (null if heap empty)
+     */
     optional<T> peek() {
         if (heap.empty()) {
             return nullopt;
@@ -100,11 +123,23 @@ public:
         return heap[0].element;
     }
 
-    // Find size
+    /**
+     * @brief Gets number of elements in the heap
+     * @return Num of elements
+     */
     int size() {
         return heap.size();
     }
 
+    /**
+     * @brief Changes the priority of an element already in the heap
+     *
+     * Finds the element with a linear search, updates its priority, then 
+     * moves it up or down to restore the heap order
+     *
+     * @param element Element to update
+     * @param newPriority Its new priority
+     */
     void adjustPriority(T element, double newPriority) {
         // Search for element
         for (int i = 0; i < heap.size(); i++) {

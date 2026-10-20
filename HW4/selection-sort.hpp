@@ -1,5 +1,6 @@
 /**
- * Selection Sort Implementation
+ * @file selection-sort.hpp
+ * @brief Selection Sort Implementation
  *  1. Find smallest element and swap with first
  *  2. Find second smallet, put it in second position
  *  3. Continue
@@ -10,6 +11,10 @@
 
 using namespace std;
 
+/**
+ * @brief Sorts vector of ints O(n^2)
+ * @param arr The vector to sort
+ */
 void selectionSort(vector<int> &arr) {
     // Go through each position in array
     for (int i = 0; i < arr.size(); i++) {
